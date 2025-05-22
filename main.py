@@ -32,8 +32,9 @@ cur.execute('''CREATE TABLE IF NOT EXISTS myall (
             id varchar(100) PRIMARY KEY,
             duration_min float)
             ''')
-mypath = os.path.abspath("spotify_top_1000_tracks.csv")
 
+mypath = os.path.abspath("spotify_top_1000_tracks.csv")
+cur.execute('DELETE FROM myall;') # make sure it's cleared
 cur.execute(f''' COPY myall(track_name,artist,album,release_date,popularity,spotify_url,id,duration_min) 
             FROM '{mypath}' 
             DELIMITER ',' 
@@ -55,7 +56,7 @@ def home():
 
     # Get the search query from the request
     query = request.args.get("q", "").strip()  # Default to an empty string if no query is provided
-    query_regex = " ".join(re.findall(r"[a-zA-Z0-9\s]+", query))
+    query_regex = " ".join(re.findall(r"[a-zA-Z0-9\s\.&\-\'\+]+", query))
     # Query the database for matching songs
     if query_regex:
         cur.execute('''

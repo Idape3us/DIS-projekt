@@ -4,12 +4,12 @@
 ![ER Diagram](spotifyER.png)
 
 ## Regex
-`[a-zA-Z0-9\s]+` is used to find songs/albums/artists that have the given input in them. 
+`[a-zA-Z0-9\s\.&\-\'\+]+` is used to find songs/albums/artists that have the given input in them. 
 We then show only matches.
 
 ## preparation
-- Install python3 and psycopg2 (with pip)
-- create a database with PostGres, named `spotify_db`
+- prerequisites: python3, flask, psycopg2
+- create a database with PostGres, named `spotify_db` with `CREATE DATABASE spotify_db;` in the PostGres terminal
 
 ## how to run
 - clone this repository
