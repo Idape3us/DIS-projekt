@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
 import re
+import os
 
 app = Flask(__name__)
 
@@ -31,9 +32,10 @@ cur.execute('''CREATE TABLE IF NOT EXISTS myall (
             id varchar(100) PRIMARY KEY,
             duration_min float)
             ''')
+mypath = os.path.abspath("spotify_top_1000_tracks.csv")
 
-cur.execute(''' COPY myall(track_name,artist,album,release_date,popularity,spotify_url,id,duration_min) 
-            FROM '/Users/idamarienielsen/Documents/ku/DIS/DIS-projekt/spotify_top_1000_tracks.csv' 
+cur.execute(f''' COPY myall(track_name,artist,album,release_date,popularity,spotify_url,id,duration_min) 
+            FROM '{mypath}' 
             DELIMITER ',' 
             CSV HEADER; 
             ''')
