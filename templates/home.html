@@ -4,8 +4,32 @@
     <meta charset="utf-8">
     <title>Top 1000 spotify songs evaa</title>
   </head>
+  <h1>Song List</h1>
+  <form action="/" method="get">
+    <input type="search" id="query" name="q" placeholder="Search..">
+    <button type="submit">Search</button>
+  </form>
   <body>
-    <h1> My First Try Using Flask </h1>
-    <p> Flask is Fun </p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Track Name</th>
+          <th>Artist</th>
+          <th>Album</th>
+          <th>Release Date</th>
+          <th>Popularity</th>
+          <th>Duration (min)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for song in songs %}
+        <tr>
+          {% for column in song %}
+          <td>{{ column }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </body>
 </html>
